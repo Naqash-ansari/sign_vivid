@@ -16,3 +16,182 @@ html { scroll-behavior: smooth; }
     background: white;
   }
 }
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .motion-ready [data-animate="reveal"] {
+    opacity: 0;
+    transform: translate3d(0, 34px, 0) scale(0.985);
+    transition:
+      opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 720ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 720ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+    filter: blur(8px);
+    will-change: opacity, transform, filter;
+  }
+
+  .motion-ready [data-animate="reveal"].is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+
+  .motion-ready [data-motion="lift"] {
+    transform: translateZ(0);
+    transition:
+      transform 220ms ease,
+      box-shadow 220ms ease,
+      border-color 220ms ease,
+      background-color 220ms ease,
+      color 220ms ease;
+    will-change: transform;
+  }
+
+  .motion-ready [data-motion="lift"]:hover {
+    transform: translate3d(0, -3px, 0);
+  }
+
+  .motion-ready button[data-motion="lift"]:active,
+  .motion-ready a[data-motion="lift"]:active {
+    transform: translate3d(0, -1px, 0) scale(0.98);
+  }
+
+  .motion-ready header {
+    animation: navDrop 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .motion-ready main section:first-child {
+    animation: heroIn 780ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .motion-ready .hero-kicker,
+  .motion-ready .hero-summary,
+  .motion-ready .hero-actions {
+    animation: fadeSlideUp 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .motion-ready .hero-kicker {
+    animation-delay: 120ms;
+  }
+
+  .motion-ready .hero-word-line {
+    display: inline-block;
+    animation: wordRise 780ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .motion-ready .hero-word-line:nth-of-type(1) {
+    animation-delay: 210ms;
+  }
+
+  .motion-ready .hero-word-line:nth-of-type(2) {
+    animation-delay: 340ms;
+  }
+
+  .motion-ready .hero-word-line:nth-of-type(3) {
+    animation-delay: 470ms;
+  }
+
+  .motion-ready .hero-summary {
+    animation-delay: 600ms;
+  }
+
+  .motion-ready .hero-actions {
+    animation-delay: 730ms;
+  }
+
+  .motion-ready .hero-letter-pop {
+    display: inline-block;
+    animation: letterPop 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .motion-ready main img {
+    transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 700ms ease;
+  }
+
+  .motion-ready main a:hover img,
+  .motion-ready main .group:hover img {
+    transform: scale(1.035);
+    filter: saturate(1.08) contrast(1.03);
+  }
+}
+
+@keyframes navDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wordRise {
+  from {
+    opacity: 0;
+    transform: translateY(42px) rotateX(24deg);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes letterPop {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.86);
+    filter: blur(4px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.08);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}

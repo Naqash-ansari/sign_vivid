@@ -1,60 +1,48 @@
 import Link from "next/link";
+import HeroStats from "./HeroStats";
 
 export default function Hero() {
   return (
-    <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-white">
-
-      {/* Background accent stripe */}
+    <section className="relative overflow-hidden bg-white px-6 pb-24 pt-32">
       <div
-        className="absolute -right-20 top-0 w-[420px] h-full bg-brand-grey"
+        className="absolute -right-20 top-0 h-full w-[420px] bg-brand-grey"
         style={{ clipPath: "polygon(18% 0, 100% 0, 100% 100%, 0% 100%)" }}
       />
 
-      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-
-        {/* Text */}
-        <div>
-          <p className="text-brand-orange text-sm font-semibold tracking-widest uppercase mb-4">
-            Design · Print · Sign
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
+        <div className="hero-copy">
+          <p className="hero-kicker mb-4 text-sm font-semibold uppercase tracking-widest text-brand-orange">
+            Design - Print - Sign
           </p>
-          <h1 className="text-5xl md:text-6xl font-black leading-tight text-brand-dark mb-6">
-            Signs That <br />
-            <span className="text-brand-orange">Speak</span> for<br />
-            Your Brand
+          <h1 className="mb-6 text-5xl font-black leading-tight text-brand-dark md:text-6xl">
+            <span className="hero-word-line">Signs That</span>
+            <br />
+            <span className="hero-word-line">
+              <span className="text-brand-orange">Speak</span> for
+            </span>
+            <br />
+            <span className="hero-word-line">Your Brand</span>
           </h1>
-          <p className="text-brand-mid text-lg leading-relaxed mb-8 max-w-md">
-            From concept to installation, we craft high-impact signage that gets your business noticed — professionally made across the UK.
+          <p className="hero-summary mb-8 max-w-md text-lg leading-relaxed text-brand-mid">
+            From concept to installation, we craft high-impact signage that gets your business noticed -- professionally made across the UK.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="hero-actions flex flex-wrap gap-4">
             <Link
               href="#contact"
-              className="bg-brand-orange text-white font-semibold px-7 py-3 rounded hover:bg-orange-600 transition-colors"
+              className="rounded bg-brand-orange px-7 py-3 font-semibold text-white transition-colors hover:bg-orange-600"
             >
               Get a Free Quote
             </Link>
             <Link
               href="#work"
-              className="border border-brand-dark text-brand-dark font-semibold px-7 py-3 rounded hover:border-brand-orange hover:text-brand-orange transition-colors"
+              className="rounded border border-brand-dark px-7 py-3 font-semibold text-brand-dark transition-colors hover:border-brand-orange hover:text-brand-orange"
             >
               View Our Work
             </Link>
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 gap-6">
-          {[
-            { value: "500+", label: "Projects Completed" },
-            { value: "12+",  label: "Years Experience"   },
-            { value: "98%",  label: "Client Satisfaction" },
-            { value: "UK",   label: "Nationwide Delivery" },
-          ].map((s) => (
-            <div key={s.label} className="bg-white border border-gray-100 rounded-lg p-6 shadow-sm">
-              <p className="text-3xl font-black text-brand-orange">{s.value}</p>
-              <p className="text-sm text-brand-mid mt-1">{s.label}</p>
-            </div>
-          ))}
-        </div>
+        <HeroStats />
       </div>
     </section>
   );
