@@ -143,11 +143,12 @@ export default function Navbar() {
 
       <div
         id="mobile-navigation"
-        className={`fixed left-0 top-0 z-50 h-screen w-[min(86vw,340px)] bg-white shadow-2xl transition-transform duration-300 ease-out md:hidden ${open ? "translate-x-0" : "-translate-x-full"
+        className={`fixed left-0 top-0 z-50 h-[100dvh] max-h-[100dvh] w-[min(86vw,340px)] bg-white shadow-2xl transition-transform duration-300 ease-out md:hidden ${open ? "translate-x-0" : "-translate-x-full"
           }`}
       >
-        <div className="flex h-full flex-col px-6 py-6">
-          <div className="mb-7 flex items-center justify-between gap-4 border-b border-gray-100 pb-5">
+        <div className="flex h-full min-h-0 flex-col">
+          <div className="shrink-0 px-6 pb-5 pt-6">
+            <div className="flex items-center justify-between gap-4 border-b border-gray-100 pb-5">
             <Image
               src="/nlogo.webp"
               alt="Sign Vivid"
@@ -166,9 +167,11 @@ export default function Navbar() {
                 <span className="absolute left-1/2 top-1/2 block h-0.5 w-6 -translate-x-1/2 -translate-y-1/2 -rotate-45 rounded bg-current transition group-hover:text-brand-orange" />
               </span>
             </button>
+            </div>
           </div>
 
-          <nav className="flex flex-col gap-1">
+          <nav className="min-h-0 flex-1 overflow-y-auto px-6 pb-6 pt-2">
+            <div className="flex flex-col gap-1">
             <div>
               <Link
                 href="/configurator-selection"
@@ -221,9 +224,10 @@ export default function Navbar() {
               </span>
               <span>Contact</span>
             </button>
+            </div>
           </nav>
 
-          <div className="mt-auto space-y-3 border-t border-gray-100 pt-5">
+          <div className="shrink-0 space-y-3 border-t border-gray-100 bg-white px-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-5">
             <a href="tel:+447876097226" className="block text-sm font-semibold text-brand-mid">
               +44 7876097226
             </a>
