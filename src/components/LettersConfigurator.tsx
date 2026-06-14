@@ -126,7 +126,7 @@ export default function LettersConfigurator({ product = "letters" }: { product?:
             </div>
           </div>
 
-          <div className="relative z-10 mb-4 flex flex-wrap items-center gap-4">
+          <div className="relative z-10 mb-4 hidden flex-wrap items-center gap-4 md:flex">
             <button
               type="button"
               data-download
