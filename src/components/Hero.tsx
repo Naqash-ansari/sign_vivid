@@ -24,7 +24,7 @@ export default function Hero() {
             <span className="hero-word-line">Your Brand</span>
           </h1>
           <p className="hero-summary mb-8 max-w-md text-lg leading-relaxed text-brand-mid">
-            From concept to installation, we craft high-impact signage that gets your business noticed -- professionally made across the UK.
+            From concept to installation, we craft high-impact signage that gets your business noticed — professionally made across the UK.
           </p>
           <div className="hero-actions flex flex-wrap gap-4">
             <Link

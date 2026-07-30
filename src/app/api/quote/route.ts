@@ -49,10 +49,7 @@ export async function POST(request: Request) {
     return Response.json(
       {
         ok: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Quote email could not be sent. Please check SMTP settings.",
+        error: "We could not send your quote request right now. Please try again shortly or contact us directly.",
       },
       { status: 500 },
     );

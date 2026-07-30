@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -76,7 +77,11 @@ export default function Feedback() {
                 <div className="mb-5 flex items-center justify-between">
                   <div className="flex gap-1 text-brand-orange" aria-label="5 star rating">
                     {Array.from({ length: 5 }).map((_, starIndex) => (
-                      <span key={`${item.company}-${starIndex}`}>*</span>
+                      <Star
+                        key={`${item.company}-${starIndex}`}
+                        className="h-4 w-4 fill-brand-orange text-brand-orange"
+                        aria-hidden="true"
+                      />
                     ))}
                   </div>
                   <span className="text-5xl font-black leading-none text-brand-orange/15">

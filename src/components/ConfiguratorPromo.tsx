@@ -1,4 +1,11 @@
 import Link from "next/link";
+import { ImageIcon, RotateCcw, Share2 } from "lucide-react";
+
+const tools = [
+  { key: "image", label: "Image", Icon: ImageIcon },
+  { key: "reset", label: "Reset", Icon: RotateCcw },
+  { key: "share", label: "Share", Icon: Share2 },
+];
 
 export default function ConfiguratorPromo() {
   return (
@@ -47,12 +54,14 @@ export default function ConfiguratorPromo() {
                 </div>
 
                 <div className="flex gap-3">
-                  {["image", "reset", "share"].map((tool) => (
+                  {tools.map(({ key, label, Icon }) => (
                     <span
-                      key={tool}
-                      className="flex h-11 w-16 items-center justify-center rounded-full bg-black/20 text-xs font-bold uppercase text-white"
+                      key={key}
+                      title={label}
+                      aria-label={label}
+                      className="flex h-11 w-16 items-center justify-center rounded-full bg-black/20 text-white"
                     >
-                      {tool.slice(0, 2)}
+                      <Icon className="h-4 w-4" aria-hidden="true" />
                     </span>
                   ))}
                 </div>
