@@ -3,7 +3,7 @@ import Link from "next/link";
 const families = [
   { title: "Glass Neon", price: "Best for premium interiors", type: "outline", href: "/glass-neon-configurator" },
   { title: "LED Neon", price: "Flexible glow signage", type: "outline", href: "/led-neon-configurator" },
-  { title: "Letters", price: "Built-up illuminated letters", type: "solid", href: "/letters-configurator" },
+  { title: "3D Letters", price: "Built-up illuminated 3D letters", type: "solid", href: "/letters-configurator" },
   { title: "Moss", price: "Green wall statement signs", type: "moss", href: "/moss-configurator" },
 ];
 
@@ -41,13 +41,12 @@ export default function ConfiguratorSelection() {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(232,114,12,0.22),transparent_30%)]" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <span
-                      className={`text-[150px] font-black leading-none ${
-                        family.type === "moss"
-                          ? "text-green-600 drop-shadow-[0_0_10px_rgba(34,197,94,0.8)]"
-                          : family.type === "solid"
-                            ? "text-zinc-100 drop-shadow-[0_0_18px_rgba(232,114,12,0.45)]"
-                            : "text-transparent [-webkit-text-stroke:8px_white] drop-shadow-[0_0_22px_rgba(232,114,12,0.65)]"
-                      }`}
+                      className={`text-[150px] font-black leading-none ${family.type === "moss"
+                        ? "text-green-600 drop-shadow-[0_0_10px_rgba(34,197,94,0.8)]"
+                        : family.type === "solid"
+                          ? "text-zinc-100 drop-shadow-[0_0_18px_rgba(232,114,12,0.45)]"
+                          : "text-transparent [-webkit-text-stroke:8px_white] drop-shadow-[0_0_22px_rgba(232,114,12,0.65)]"
+                        }`}
                     >
                       A
                     </span>

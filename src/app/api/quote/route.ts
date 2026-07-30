@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
 
-const recipient = "naqashansari046@gmail.com";
+const recipient = "info@signvivid.co.uk";
 
 export async function POST(request: Request) {
   try {

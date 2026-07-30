@@ -228,8 +228,8 @@ export default function Navbar() {
           </nav>
 
           <div className="shrink-0 space-y-3 border-t border-gray-100 bg-white px-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-5">
-            <a href="tel:+447876097226" className="block text-sm font-semibold text-brand-mid">
-              +44 7876097226
+            <a href="tel:+447728339751" className="block text-sm font-semibold text-brand-mid">
+              +44 7728 339751
             </a>
             <Link
               href="/quote"
@@ -272,10 +272,10 @@ export default function Navbar() {
             </div>
 
             <a
-              href="tel:+447876097226"
+              href="tel:+447728339751"
               className="block rounded-lg bg-orange-50 px-4 py-3 text-center text-xl font-semibold text-brand-orange"
             >
-              +44 7876097226
+              +44 7728 339751
             </a>
 
             <p className="mt-3 text-center text-sm font-medium text-brand-mid">
@@ -291,7 +291,7 @@ export default function Navbar() {
             </Link>
 
             <a
-              href="https://wa.me/447876097226"
+              href="https://wa.me/447728339751"
               className="mt-3 block rounded border border-brand-dark px-5 py-3 text-center text-sm font-semibold text-brand-dark transition hover:border-brand-orange hover:text-brand-orange"
             >
               WhatsApp
@@ -307,15 +307,15 @@ export default function Navbar() {
             <div className="mt-6 space-y-4 border-t border-gray-100 pt-5 text-center text-sm leading-relaxed text-brand-mid">
               <div>
                 <p className="font-medium text-brand-dark">Cooperations & media</p>
-                <a className="underline underline-offset-4" href="mailto:media@signvivid.com">
-                  media@signvivid.com
+                <a className="underline underline-offset-4" href="mailto:sales@signvivid.co.uk">
+                  sales@signvivid.co.uk
                 </a>
               </div>
 
               <div>
                 <p className="font-medium text-brand-dark">Further requests</p>
-                <a className="underline underline-offset-4" href="mailto:projects@signvivid.com">
-                  projects@signvivid.com
+                <a className="underline underline-offset-4" href="mailto:info@signvivid.co.uk">
+                  info@signvivid.co.uk
                 </a>
               </div>
             </div>

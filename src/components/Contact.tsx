@@ -19,7 +19,7 @@ export default function Contact() {
             Start Quote
           </Link>
           <a
-            href="mailto:hello@signvivid.co.uk"
+            href="mailto:info@signvivid.co.uk"
             className="rounded border border-brand-dark px-7 py-3 font-semibold text-brand-dark transition hover:border-brand-orange hover:text-brand-orange"
           >
             Email Us

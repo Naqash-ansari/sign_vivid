@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 
 export type ProjectCard = {
@@ -21,8 +22,34 @@ export default function ProjectGrid({
   initialCount = 6,
 }: ProjectGridProps) {
   const [visibleCount, setVisibleCount] = useState(initialCount);
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const [mounted, setMounted] = useState(false);
   const visibleProjects = projects.slice(0, visibleCount);
   const hasMoreProjects = visibleCount < projects.length;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = lightbox ? "hidden" : "";
+
+    if (!lightbox) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setLightbox(null);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [lightbox]);
 
   return (
     <>
@@ -32,7 +59,21 @@ export default function ProjectGrid({
             key={project.title}
             className="group overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10"
           >
-            <div className="relative aspect-[16/10] overflow-hidden bg-brand-dark">
+            <div
+              className="relative aspect-[16/10] overflow-hidden bg-brand-dark cursor-zoom-in"
+              role="button"
+              tabIndex={0}
+              aria-label={`View ${project.title} image full screen`}
+              onClick={() =>
+                setLightbox({ src: project.image, alt: `${project.title} signage project by Sign Vivid` })
+              }
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setLightbox({ src: project.image, alt: `${project.title} signage project by Sign Vivid` });
+                }
+              }}
+            >
               <Image
                 src={project.image}
                 alt={`${project.title} signage project by Sign Vivid`}
@@ -81,6 +122,41 @@ export default function ProjectGrid({
           </button>
         </div>
       ) : null}
+
+      {mounted && lightbox
+        ? createPortal(
+            <div
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-8"
+              role="dialog"
+              aria-modal="true"
+              aria-label={lightbox.alt}
+              onClick={() => setLightbox(null)}
+            >
+              <div
+                className="relative"
+                style={{ width: "min(92vw, 1200px)", height: "82vh" }}
+                onClick={(event) => event.stopPropagation()}
+              >
+                <Image
+                  src={lightbox.src}
+                  alt={lightbox.alt}
+                  fill
+                  sizes="92vw"
+                  className="object-contain"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => setLightbox(null)}
+                aria-label="Close full screen image"
+                className="absolute right-4 top-4 z-[110] flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+              >
+                ✕
+              </button>
+            </div>,
+            document.body,
+          )
+        : null}
     </>
   );
 }

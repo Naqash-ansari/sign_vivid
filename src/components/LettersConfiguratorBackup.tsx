@@ -62,32 +62,10 @@ const productConfig = {
 
 type ProductKey = keyof typeof productConfig;
 
-function darkenHex(hex: string, amount: number) {
-  const num = parseInt(hex.replace("#", ""), 16);
-  const clamp = (value: number) => Math.max(0, Math.min(255, value));
-  const r = clamp((num >> 16) + amount);
-  const g = clamp(((num >> 8) & 0x00ff) + amount);
-  const b = clamp((num & 0x0000ff) + amount);
-  return `#${(0x1000000 + r * 0x10000 + g * 0x100 + b).toString(16).slice(1)}`;
-}
-
-function buildExtrudeShadow(colourValue: string, glowType: string = "Front lit") {
-  const depth = 9;
-  const dark = darkenHex(colourValue, -70);
-  const layers = Array.from({ length: depth }, (_, index) => `${index + 1}px ${index + 1}px 0 ${dark}`);
-
-  if (glowType !== "Non illuminated") {
-    layers.push(`0 0 18px ${colourValue}`);
-  }
-  layers.push(`${depth + 5}px ${depth + 7}px 16px rgba(0,0,0,.5)`);
-  return layers.join(", ");
-}
-
-export default function LettersConfigurator({ product = "letters" }: { product?: ProductKey }) {
+export default function LettersConfiguratorBackup({ product = "letters" }: { product?: ProductKey }) {
   const config = productConfig[product];
-  const rootId = `configurator-${product}`;
+  const rootId = `configurator-backup-${product}`;
   const defaultColour = colours[0][1];
-  const isBuiltUp = config.effect === "solid";
 
   return (
     <main
@@ -124,25 +102,19 @@ export default function LettersConfigurator({ product = "letters" }: { product?:
           <div className="relative z-10 flex flex-1 items-center justify-center">
             <div className="text-center">
               <div className="relative inline-block">
-                {!isBuiltUp && (
-                  <div
-                    data-preview-bar
-                    className="absolute left-0 right-0 top-1/2 h-2 -translate-y-1/2 bg-white/80"
-                    style={{ boxShadow: `0 0 18px ${defaultColour}` }}
-                  />
-                )}
+                <div
+                  data-preview-bar
+                  className="absolute left-0 right-0 top-1/2 h-2 -translate-y-1/2 bg-white/80"
+                  style={{ boxShadow: `0 0 18px ${defaultColour}` }}
+                />
                 <h1
                   data-preview-text
-                  className={`relative px-8 font-black leading-none tracking-tight ${
-                    isBuiltUp ? "" : "drop-shadow-[0_6px_3px_rgba(0,0,0,0.45)]"
-                  }`}
+                  className="relative px-8 font-black leading-none tracking-tight drop-shadow-[0_6px_3px_rgba(0,0,0,0.45)]"
                   style={{
                     color: config.effect === "outline" ? "transparent" : defaultColour,
                     fontSize: "clamp(4rem, 12.5vw, 9.5rem)",
                     WebkitTextStroke: config.effect === "outline" ? `6px ${defaultColour}` : undefined,
-                    textShadow: isBuiltUp
-                      ? buildExtrudeShadow(defaultColour)
-                      : `0 0 18px ${defaultColour}, 0 8px 3px rgba(0,0,0,.45)`,
+                    textShadow: `0 0 18px ${defaultColour}, 0 8px 3px rgba(0,0,0,.45)`,
                   }}
                 >
                   {config.defaultText}
@@ -456,30 +428,6 @@ function configuratorScript(rootId: string) {
     extras: []
   };
   var effect = root.dataset.effect || "solid";
-
-  function darkenHex(hex, amount) {
-    var num = parseInt(hex.replace("#", ""), 16);
-    var clamp = function (value) { return Math.max(0, Math.min(255, value)); };
-    var r = clamp((num >> 16) + amount);
-    var g = clamp(((num >> 8) & 0x00ff) + amount);
-    var b = clamp((num & 0x0000ff) + amount);
-    return "#" + (0x1000000 + r * 0x10000 + g * 0x100 + b).toString(16).slice(1);
-  }
-
-  function buildExtrudeShadow(colourValue, glowType) {
-    var depth = 9;
-    var dark = darkenHex(colourValue, -70);
-    var layers = [];
-    for (var i = 1; i <= depth; i++) {
-      layers.push(i + "px " + i + "px 0 " + dark);
-    }
-    if (glowType !== "Non illuminated") {
-      layers.push("0 0 18px " + colourValue);
-    }
-    layers.push((depth + 5) + "px " + (depth + 7) + "px 16px rgba(0,0,0,.5)");
-    return layers.join(", ");
-  }
-
   var preview = root.querySelector("[data-preview-text]");
   var bar = root.querySelector("[data-preview-bar]");
   var summary = root.querySelector("[data-summary-line]");
@@ -518,9 +466,7 @@ function configuratorScript(rootId: string) {
     preview.style.fontSize = "clamp(4rem, " + Math.max(6.4, Math.min(15, Number(state.sizeValue || 125) / 10)) + "vw, 9.5rem)";
     preview.style.color = effect === "outline" ? "transparent" : state.colourValue;
     preview.style.webkitTextStroke = effect === "outline" ? "6px " + state.colourValue : "";
-    preview.style.textShadow = effect === "solid"
-      ? buildExtrudeShadow(state.colourValue, state.glowType)
-      : (state.glowType === "Non illuminated" ? "0 8px 3px rgba(0,0,0,.45)" : "0 0 18px " + state.colourValue + ", 0 8px 3px rgba(0,0,0,.45)");
+    preview.style.textShadow = state.glowType === "Non illuminated" ? "0 8px 3px rgba(0,0,0,.45)" : "0 0 18px " + state.colourValue + ", 0 8px 3px rgba(0,0,0,.45)";
     if (bar) bar.style.boxShadow = state.glowType === "Non illuminated" ? "none" : "0 0 18px " + state.colourValue;
     if (summary) {
       summary.textContent = [root.dataset.summary, state.colourName, state.location, state.background].filter(Boolean).join(" - ");
@@ -663,30 +609,15 @@ function configuratorScript(rootId: string) {
     ctx.font = "900 170px sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    var mainText = state.text || root.dataset.defaultText || "";
-    if (effect === "solid") {
-      var extrudeDepth = 9;
-      var darkFill = darkenHex(state.colourValue, -70);
-      ctx.shadowBlur = 0;
-      ctx.fillStyle = darkFill;
-      for (var d = extrudeDepth; d >= 1; d--) {
-        ctx.fillText(mainText, canvas.width / 2 + d, 390 + d);
-      }
-      ctx.shadowColor = state.colourValue;
-      ctx.shadowBlur = state.glowType === "Non illuminated" ? 0 : 32;
-      ctx.fillStyle = state.colourValue;
-      ctx.fillText(mainText, canvas.width / 2, 390);
+    ctx.shadowColor = state.colourValue;
+    ctx.shadowBlur = state.glowType === "Non illuminated" ? 0 : 32;
+    if (effect === "outline") {
+      ctx.strokeStyle = state.colourValue;
+      ctx.lineWidth = 10;
+      ctx.strokeText(state.text || root.dataset.defaultText || "", canvas.width / 2, 390);
     } else {
-      ctx.shadowColor = state.colourValue;
-      ctx.shadowBlur = state.glowType === "Non illuminated" ? 0 : 32;
-      if (effect === "outline") {
-        ctx.strokeStyle = state.colourValue;
-        ctx.lineWidth = 10;
-        ctx.strokeText(mainText, canvas.width / 2, 390);
-      } else {
-        ctx.fillStyle = state.colourValue;
-        ctx.fillText(mainText, canvas.width / 2, 390);
-      }
+      ctx.fillStyle = state.colourValue;
+      ctx.fillText(state.text || root.dataset.defaultText || "", canvas.width / 2, 390);
     }
     ctx.shadowBlur = 0;
     ctx.fillStyle = "#fff";

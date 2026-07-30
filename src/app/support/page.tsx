@@ -65,7 +65,7 @@ export default function SupportPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a
-                href="mailto:projects@signvivid.com"
+                href="mailto:info@signvivid.co.uk"
                 className="rounded bg-brand-orange px-7 py-3 font-bold text-white transition hover:bg-orange-600"
               >
                 Email Support
@@ -138,20 +138,20 @@ export default function SupportPage() {
               <div className="mt-5 space-y-3 text-brand-mid">
                 <p>
                   Project and support requests:
-                  <a className="ml-1 font-semibold text-brand-dark underline underline-offset-4" href="mailto:projects@signvivid.com">
-                    projects@signvivid.com
+                  <a className="ml-1 font-semibold text-brand-dark underline underline-offset-4" href="mailto:info@signvivid.co.uk">
+                    info@signvivid.co.uk
                   </a>
                 </p>
                 <p>
                   Cooperations and media:
-                  <a className="ml-1 font-semibold text-brand-dark underline underline-offset-4" href="mailto:media@signvivid.com">
-                    media@signvivid.com
+                  <a className="ml-1 font-semibold text-brand-dark underline underline-offset-4" href="mailto:sales@signvivid.co.uk">
+                    sales@signvivid.co.uk
                   </a>
                 </p>
                 <p>
                   Phone:
-                  <a className="ml-1 font-semibold text-brand-dark underline underline-offset-4" href="tel:+447876097226">
-                    +44 7876097226
+                  <a className="ml-1 font-semibold text-brand-dark underline underline-offset-4" href="tel:+447728339751">
+                    +44 7728 339751
                   </a>
                 </p>
               </div>
