@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const links = [
@@ -228,7 +228,8 @@ export default function Navbar() {
           </nav>
 
           <div className="shrink-0 space-y-3 border-t border-gray-100 bg-white px-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-5">
-            <a href="tel:+447728339751" className="block text-sm font-semibold text-brand-mid">
+            <a href="tel:+447728339751" className="flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-brand-mid">
+              <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
               +44 7728 339751
             </a>
             <Link
@@ -273,8 +274,9 @@ export default function Navbar() {
 
             <a
               href="tel:+447728339751"
-              className="block rounded-lg bg-orange-50 px-4 py-3 text-center text-xl font-semibold text-brand-orange"
+              className="flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-orange-50 px-4 py-3 text-center text-lg font-semibold text-brand-orange sm:text-xl"
             >
+              <Phone className="h-5 w-5 shrink-0" aria-hidden="true" />
               +44 7728 339751
             </a>
 

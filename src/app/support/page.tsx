@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import { Phone } from "lucide-react";
 
 const supportRequests = [
   {
@@ -148,9 +149,13 @@ export default function SupportPage() {
                     sales@signvivid.co.uk
                   </a>
                 </p>
-                <p>
+                <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
                   Phone:
-                  <a className="ml-1 font-semibold text-brand-dark underline underline-offset-4" href="tel:+447728339751">
+                  <a
+                    className="flex items-center gap-1.5 whitespace-nowrap font-semibold text-brand-dark underline underline-offset-4"
+                    href="tel:+447728339751"
+                  >
+                    <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
                     +44 7728 339751
                   </a>
                 </p>
