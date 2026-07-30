@@ -294,6 +294,8 @@ export default function Navbar() {
               href={`https://wa.me/447728339751?text=${encodeURIComponent(
                 "Hi Sign Vivid, I would like to enquire about a signage project. Could you help me with pricing and next steps?",
               )}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-3 block rounded border border-brand-dark px-5 py-3 text-center text-sm font-semibold text-brand-dark transition hover:border-brand-orange hover:text-brand-orange"
             >
               WhatsApp
